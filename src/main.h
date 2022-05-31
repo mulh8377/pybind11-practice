@@ -6,46 +6,26 @@
 #define CMAKE_EXAMPLE_HAND_H
 
 #include <pybind11/pybind11.h>
-#include <memory>
 
-namespace py = pybind11;
+#include "linkedlist.h"
+#include "map.h"
+#include "tree.h"
 
-class LinkedList {
-    struct Node {
-        int data;
-        std::unique_ptr<Node> next;
-    };
-private:
-    std::unique_ptr<Node> container;
-    uint64_t memory;
-public:
-    LinkedList() = default;
-    ~LinkedList() = default;
+namespace container {
 
-    void push(const int data) {
-        container = std::unique_ptr<Node>(new Node{data, std::move(container)});
-        memory++;
+    namespace py = pybind11;
+
+    void bind_linkedlist(py::module_ &m) {
+        bind_class_LinkedList(m);
+    }
+    void bind_tree(py::module_& m) {
+        bind_class_tree(m);
+
     }
 
-    const int pop() {
-        const int p = container->data;
-        container = std::move(container->next);
-        memory--;
-        return p;
+    void bind_map(py::module_& m) {
+
     }
-};
 
-static void bind_class_LinkedList(py::module_& m) {
-
-    py::class_<LinkedList>(m, "LinkedList")
-        .def(py::init<>())
-        .def("push", &LinkedList::push)
-        .def("pop", &LinkedList::pop);
 }
-
-void bind_linkedlist(py::module_& m) {
-    bind_class_LinkedList(m);
-}
-
-
 #endif //CMAKE_EXAMPLE_HAND_H
