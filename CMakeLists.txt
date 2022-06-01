@@ -14,4 +14,7 @@ add_subdirectory(lib/googletest) # I renamed googletest-master folder to gtest, 
 include_directories(lib/googletest/googletest/include)
 include_directories(lib/googletest/googlemock/include)
 
+find_package(FunctionalPlus REQUIRED)
+add_dependencies(cmake_example FunctionalPlus::fplus)
+
 #target_link_libraries(tests gtest gtest_main pybind11)

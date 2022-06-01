@@ -8,3 +8,5 @@ _generate/
 *env*
 .idea/
 cmake-build-debug/
+
+lib/*
