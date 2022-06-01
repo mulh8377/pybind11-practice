@@ -16,9 +16,11 @@
 namespace detail {
 
     namespace py = pybind11;
+    namespace f = fplus;
 
     template<typename Vector, typename Class_>
     void list_modifiers(Class_ &c1) {
+
         c1.def("clear", [](Vector &v) { v.clear(); });
     }
     template<typename Vector, typename Class_>
